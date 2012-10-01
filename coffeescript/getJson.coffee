@@ -18,25 +18,26 @@ getXmlRequest = (page, callbackFunc, asynchronous, sendStr, httpMethod, response
   request.send params['sendStr']
   request.onreadystatechange = ->
     if request.readyState is 4 and request.status is 200
-      #callbackFunc JSON.parse request.responseText
       switch params['responseType']
         when 'json'
           callbackFunc JSON.parse request.responseText
         when 'text', null
           callbackFunc request.responseText
       
-
 getJson = (page, callbackFunc, asynchronous, sendStr, httpMethod) ->  
   getXmlRequest(page, callbackFunc, asynchronous, sendStr, httpMethod, 'json')
 
-callbackJson = (returnJson) ->
-  if typeof returnJson is 'object'
-    for x of returnJson
-      console.log returnJson[x]
-  else if typeof returnJson is 'string'
-    console.log returnJson
+getText = (page, callbackFunc, asynchronous, sendStr, httpMethod) ->  
+  getXmlRequest(page, callbackFunc, asynchronous, sendStr, httpMethod, 'text')
 
-getJson 'echo.php', callbackJson
-#params = xmlRequestParams()
-#for k, v of params
-#  console.log k + ' ' + v
+callbackResponse = (requestReturn) ->
+  switch typeof requestReturn
+    when 'object'
+      for x of requestReturn
+        console.log requestReturn[x]
+    when 'string'
+      console.log requestReturn
+
+# Test functions...
+#getJson 'echo.php', callbackResponse
+#getText 'echo.php', callbackResponse
