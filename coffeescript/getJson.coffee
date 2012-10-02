@@ -1,4 +1,4 @@
-xmlRequest = ->  
+xmlRequest = ->
   return new XMLHttpRequest()
 
 xmlRequestParams = (page, callbackFunc, asynchronous, sendStr, httpMethod, responseType) ->
@@ -11,7 +11,7 @@ xmlRequestParams = (page, callbackFunc, asynchronous, sendStr, httpMethod, respo
     responseType: responseType or null
   return xmlParams
 
-getXmlRequest = (page, callbackFunc, asynchronous, sendStr, httpMethod, responseType) ->  
+getXmlRequest = (page, callbackFunc, asynchronous, sendStr, httpMethod, responseType) ->
   request = new xmlRequest()
   params = xmlRequestParams page, callbackFunc, asynchronous, sendStr, httpMethod, responseType 
   request.open params.httpMethod, params.page, params.asynchronous
@@ -23,8 +23,8 @@ getXmlRequest = (page, callbackFunc, asynchronous, sendStr, httpMethod, response
           callbackFunc JSON.parse request.responseText
         when 'text', null
           callbackFunc request.responseText
-      
-getJson = (page, callbackFunc, asynchronous, sendStr, httpMethod) ->  
+          
+getJson = (page, callbackFunc, asynchronous, sendStr, httpMethod) ->
   getXmlRequest page, callbackFunc, asynchronous, sendStr, httpMethod, 'json'
 
 getText = (page, callbackFunc, asynchronous, sendStr, httpMethod) ->  
@@ -37,6 +37,10 @@ callbackResponse = (requestReturn) ->
         console.log requestReturn[x]
     when 'string'
       console.log requestReturn
+      
+domPurgeChildren = (domElement) ->
+  while domElement.childNodes.length >= 1
+    domElement.removeChild domElement.firstChild
 
 # Test functions...
 #getJson 'echo.php', callbackResponse
