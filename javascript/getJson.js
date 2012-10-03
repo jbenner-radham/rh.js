@@ -1,9 +1,19 @@
 var rhXhr = {
     
-	xhr: function() {
+    xhr: function() {
 		return new XMLHttpRequest();
 	},
+    
+    params: {
+        page: null,
+        callbackFunc: null,
+        asynchronous: true,
+        sendStr: null,
+        httpMethod: 'GET',
+        responseType: null
+    },
 	
+    /* xhrParams is depricated, will be removed. */
 	xhrParams: function(page, callbackFunc, asynchronous, sendStr, httpMethod, responseType) {
 		/*
 		var _method = this.xhrParams;
@@ -26,24 +36,23 @@ var rhXhr = {
 	},
 	
 	xhrRequest: function(page, callbackFunc, asynchronous, sendStr, httpMethod, responseType) {
-		var params, request;
-        request = new this.xhr();
-		params = this.xhrParams(page, callbackFunc, asynchronous, sendStr, httpMethod, responseType);
+		var request = new this.xhr();
+		var params = this.params;
         request.open(params.httpMethod, params.page, params.asynchronous);
         request.send(params.sendStr);
         return request.onreadystatechange = function() {
             if (request.readyState === 4 && request.status === 200) {
                 switch (params.responseType) {
                     case 'json':
-                        return callbackFunc(JSON.parse(request.responseText));
+                        return params.callbackFunc(JSON.parse(request.responseText));
                     case 'text':
                     case null:
-                        return callbackFunc(request.responseText);
+                        return params.callbackFunc(request.responseText);
                 }
             }
         };
     },
-	
+
 	test2: function() {
 		console.log('test2');
 	},
@@ -53,7 +62,10 @@ var rhXhr = {
 	},
 	
 	getText: function(page, callbackFunc, asynchronous, sendStr, httpMethod) {
-		this.xhrRequest(page, callbackFunc, asynchronous, sendStr, httpMethod, 'text');
+		this.params.page = page || null;
+		this.params.callbackFunc = callbackFunc || null;
+		this.params.responseType = 'text';
+		this.xhrRequest();
 	},
 	
 	getJson: function(page, callbackFunc, asynchronous, sendStr, httpMethod) {
@@ -63,10 +75,10 @@ var rhXhr = {
 };
 
 var cbJson = function(returnJson) {
-	//console.log(returnJson);
-	for (var x in returnJson) {
-		console.log(returnJson[x]);
-	}
+	console.log(returnJson);
+	//for (var x in returnJson) {
+	//	console.log(returnJson[x]);
+	//}
 };
 
 /*
@@ -80,28 +92,4 @@ for (var key in rhXhr) {
 //rhXhr.xhrParams();
 //rhXhr.testParams();
 
-rhXhr.getJson('echo.php', cbJson);
-
-
-/*
-var getJSON = function(page, callbackFunc, sendStr, httpMethod) {
-    sendStr = sendStr || null;
-	httpMethod = httpMethod || 'GET';
-	var request = new XMLHttpRequest();
-	request.open(httpMethod, page, true);
-	request.send(sendStr);
-	request.onreadystatechange = function() {
-        if (request.readyState == 4 && request.status == 200) {
-            callbackFunc(JSON.parse(request.responseText));
-        }
-    };
-};
-
-var cbJson = function(returnJson) {
-	for (var x in returnJson) {
-		console.log(returnJson[x]);
-	}
-};
-
-getJSON('echo.php', cbJson);
-*/
+rhXhr.getText('echo.php', cbJson);
