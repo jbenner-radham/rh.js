@@ -15,6 +15,17 @@ You should have received a copy of the GNU General Public License
 along with rh.js.  If not, see <http://www.gnu.org/licenses/>.
 ------------------------------------------------------------------###
 
+mkStyle = (paramStr) ->
+  head = document.getElementsByTagName('head')[0]
+  styleEle = document.createElement 'style'
+  styleEle.type = 'text/css'
+  styleEle.media = 'screen'
+  if styleEle.styleSheet ### IE method ###
+    styleEle.styleSheet.cssText = paramStr
+  else ### Other browsers ###
+    styleEle.appendChild document.createTextNode paramStr
+  head.appendChild styleEle
+
 carousel = (imgId) ->
   rightPrior = parseInt imgId.style.right, 10 or 0
   console.log 'rightPrior is: ' + rightPrior
@@ -30,4 +41,5 @@ Call/Testing functions
 imgId = document.getElementById('theImg')
 window.intervalId = setInterval carousel, 30, imgId
 console.log 'IntervalId is: ' + intervalId
+mkStyle 'h3{color:green}'
 ###

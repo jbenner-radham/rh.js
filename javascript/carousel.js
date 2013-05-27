@@ -30,6 +30,14 @@ carousel = function(imgId) {
 };
 
 /*
+for (var x in window.document.documentElement.style) {
+    //document.write(x + '<br>'); // This searches all of the CSS methods available in the DOM.
+    // Need to add check for IE & Opera animations.
+    if (x === 'animation' || x === 'webkitAnimation' || x === 'MozAnimation') document.write(x + '<br>');
+}
+*/
+
+/*
 Call/Testing functions
 ----------------------
 imgId = document.getElementById('theImg')
