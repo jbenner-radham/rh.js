@@ -26,9 +26,11 @@ var RH = (function() {
                     
                     var i, str = this.trimR();
 
-                    for(i = str.length - 1; str[i] !== ' '; --i);
+                    // Added a safety to handle if the string doesn't have a space.
+                    for (i = str.length - 1; str[i] !== ' ' && i > 0; --i);
 
-                    return str.slice(++i);
+                    // The accompanying ternary statement for the no space scenario.
+                    return str.slice(i? ++i : 0);
 
                 };
 

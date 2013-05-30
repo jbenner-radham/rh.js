@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-<script type="application/javascript">
-
->>>>>>> 056f4eb74bb60706163cf425690e70ba204fb4cb
 var RH_DOM = function(eleType) {
     'use strict';
     var _id = 'RH_DOM_ele_' + Math.random();
@@ -23,11 +18,7 @@ var RH_DOM = function(eleType) {
     };
 
     this.class = function(classStr) {
-<<<<<<< HEAD
 		_attrib('class', classStr);
-=======
-    	_attrib('class', classStr);
->>>>>>> 056f4eb74bb60706163cf425690e70ba204fb4cb
 	};
 
 	this.name = function(nameStr) {
@@ -51,23 +42,4 @@ RH_DOM.prototype.class = function(classStr) {
 */
 
 // Yay!!!
-<<<<<<< HEAD
 // _idH.getAttribute(); to get various attribute values.
-=======
-// _idH.getAttribute(); to get various attribute values.
-
-</script>
-
-<style type="text/css">
-.blue { background-color: blue; }
-.yellow { background-color: yellow; }
-</style>
-
-<div id="wrapper">
-
-<script type="application/javascript">
-	var div = new RH_DOM('div');
-</script>
-
-</div>
->>>>>>> 056f4eb74bb60706163cf425690e70ba204fb4cb
