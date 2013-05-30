@@ -12,27 +12,43 @@ var RH = (function() {
             
             } else {
 
-                this.trimR = function() { 
-                    
-                    var i = selector.length - 1;
+                var _methodSelf = this;
 
-                    for (; selector[i] === ' '; --i);
+                this.trim = {
 
-                    return selector.slice(0, ++i);
+                    right: function() { 
+                        
+                        var i = selector.length - 1;
 
-                };
+                        for (; selector[i] === ' '; --i);
 
-                this.wordLast = function() {
-                    
-                    var i, str = this.trimR();
+                        return selector.slice(0, ++i);
 
-                    // Added a safety to handle if the string doesn't have a space.
-                    for (i = str.length - 1; str[i] !== ' ' && i > 0; --i);
-
-                    // The accompanying ternary statement for the no space scenario.
-                    return str.slice(i? ++i : 0);
+                    }
 
                 };
+                
+                // aliases for trim{}...
+                this.trimR = function() { return this.trim.right() };
+
+                this.word = {
+
+                    last: function() {
+                    
+                        var i, str = _methodSelf.trim.right();
+
+                        // Added a safety to handle if the string doesn't have a space.
+                        for (i = str.length - 1; str[i] !== ' ' && i > 0; --i);
+
+                        // The accompanying ternary statement for the no space scenario.
+                        return str.slice(i? ++i : 0);
+
+                    }
+
+                };
+                
+                // aliases for word{}...
+                this.wordLast = function() { return this.word.last() };
 
             }
 
