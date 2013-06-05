@@ -4,6 +4,20 @@ var RH = (function() {
 
     _self = function(selector) {
 
+        // Random object size function...
+        this.size = function() {
+            
+            var size = 0,
+                obj = selector;
+            
+            for (var prop in obj) {
+                obj.hasOwnProperty(prop) && ++size;
+            }
+
+            return size;
+        };
+
+
         if (typeof selector === 'string') {
 
             if (selector[0] === '#') {
@@ -80,8 +94,7 @@ var RH = (function() {
 
                     init: function() {
 
-                        // _methodSelf.character.special.is()) << This doesn't work because it goes on a recursive loop, duh me!
-                        if (!isNaN(selector) || '~`!#$%^&*+=-[]\\\';,/{}|":<>?'.indexOf(selector) !== -1)
+                        if (!isNaN(selector) || '~`!#$%^&*+=-[]\\\';,/{}|":<>?'.indexOf(selector) !== -1) //_methodSelf.character.special.is()) << This doesn't work because it goes on a recursive loop, duh me!
                             return false;
 
                         return selector.length === 1? selector : selector[0];
@@ -129,10 +142,81 @@ var RH = (function() {
                 };
 
                 this.isUC = function() { return this.character.upper.is() }
-
                 this.isLC = function() { return this.character.lower.is() }
-
                 this.isSpc = function() { return this.character.special.is() }
+
+
+                this.html = {
+
+                    elements: {
+
+                        // Array of void elements 
+                        // a.k.a. informally "self-closing tags."
+                        arVoid: [
+                            'area',
+                            'base',
+                            'br',
+                            'col',
+                            'command',
+                            'emed',
+                            'hr',
+                            'img',
+                            'input',
+                            'keygen',
+                            'link',
+                            'meta',
+                            'param',
+                            'source',
+                            'track',
+                            'wbr'
+                        ]
+
+                    },
+
+                    tag: {
+
+                        builder: function(objAttribs) {
+                            
+                            var html = '<',
+                                notVoid = objAttribs.name && !(objAttribs.name in _methodSelf.html.elements.arVoid)? objAttribs.name : false 
+
+                            objAttribs.name && (html += objAttribs.name)
+                                            && delete objAttribs.name 
+                                            && (html += _self(objAttribs).size() >= 1? ' ':'')
+
+                            console.log(notVoid);
+
+                            for (var prop in objAttribs) {
+                                // .hasOwnProperty may be un-needed but just in case...
+                                if (objAttribs.hasOwnProperty(prop)) {
+                                    console.log(prop + ' - ' + objAttribs[prop]);
+                                    html += prop + '="' + objAttribs[prop] + '" '
+                                }
+                            }
+
+                            html = _self(html).trim.right();
+                            return html += (notVoid? ' /' : '</' + notVoid) + '>'
+
+                        }
+
+                    },
+
+                    link: {
+
+                        less: function() {
+                            
+                            return _methodSelf.html.tag.builder({
+                                name: 'link',
+                                rel:  "stylesheet/less", 
+                                type: 'text/css',
+                                src:  selector + '.less'
+                            })
+
+                        }
+
+                    }
+
+                };
 
             }
 
