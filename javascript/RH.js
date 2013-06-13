@@ -19,8 +19,8 @@ var RH = (function() {
 
     if (typeof selector === 'string') {
 
-      if (selector[0] === '#')
-        return document.getElementById(selector.slice(1));
+      // If the selector is a CSS ID return a DOM element handle.
+      if (selector[0] === '#') return document.getElementById(selector.slice(1))
 
       var _methodSelf = this;
 
@@ -223,9 +223,9 @@ var RH = (function() {
               if (selector[obj].hasOwnProperty(key) && key == search)
                 return selector[obj][key] // <- Value
           
-        } // psuedo-method - get
+      } // psuedo-method - get
 
-      } // End of object methods.
+    } // End of object methods.
 
     return this;
   } // End of object methods.
