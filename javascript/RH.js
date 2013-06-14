@@ -1,3 +1,8 @@
+// Random though, SQL style object/array queries?
+// -----
+// RH(objNme).where('objProp is x')
+
+
 var RH = (function() {
 
   var RH = {}, _self = RH;
@@ -10,8 +15,7 @@ var RH = (function() {
       var size = 0,
           obj  = selector;
       
-      for (var prop in obj)
-        obj.hasOwnProperty(prop) && ++size;
+      for (var prop in obj) obj.hasOwnProperty(prop) && ++size;
 
       return size;
     }; // size
@@ -19,10 +23,9 @@ var RH = (function() {
 
     if (typeof selector === 'string') {
 
-      // If the selector is a CSS ID return a DOM element handle.
       if (selector[0] === '#') return document.getElementById(selector.slice(1))
 
-      var _methodSelf = this;
+      var _parent = this;
 
       this.trim = {
 
@@ -47,7 +50,7 @@ var RH = (function() {
         }
 
       }; // psuedo-method trim
-          
+      
       // aliases for trim{}...
       this.trimR = function() { return this.trim.right() };
       this.trimL = function() { return this.trim.left() };
@@ -56,7 +59,7 @@ var RH = (function() {
 
         last: function() {
         
-          var i, str = _methodSelf.trim.right();
+          var i, str = _parent.trim.right();
 
           // Added a safety to handle if the string doesn't have a space.
           for (i = str.length - 1; str[i] !== ' ' && i > 0; --i);
@@ -68,26 +71,71 @@ var RH = (function() {
 
         spaceCaps: function() {
 
-          var str = _methodSelf.trim.left(), rtrnStr = ''
+          var str = _parent.trim.left(), rtrnStr = ''
 
           for (var i = 0, len = str.length; i < len; ++i)
             rtrnStr += (_self(str[i]).isUC() && i !== 0? ' ' : '') + str[i]
 
           return rtrnStr;
 
-        }
+        },
+
+        each: function(lambda) {
+
+          // Synopsis:
+          // Each character in a string is returned via loop back to
+          // the supplied lambda argv.
+
+          // To do: Look into optionally returning key/value pairs.
+
+          for (var i = 0, len = selector.length; i < len; ++i)
+            lambda.apply(this, [selector[i]])
+
+        } // psuedo-method each
 
       }; // object - word
 
       // aliases for word{}...
       this.wordLast        = function() { return this.word.last()      }
       this.automagicSpaces = function() { return this.word.spaceCaps() }
+      this.each            = function(l) { return this.word.each(l)     }
+
+
+      this.code = {
+
+        brackets: {
+
+          match: function() {
+
+            // Synopsis:
+            // Supply a string and return the matching end bracket.
+
+            // To do: Handle nested brackets via the nested int/bool var.  
+
+            var nested = false
+
+            for (var i = 0, len = selector.length; i < len; ++i)
+              if (selector[i] === '}')
+                if (!nested)
+                  return i
+
+            //_parent.each(function(c) {
+            //  var nested = false
+            //  if (c === '}')
+            //    if (!nested)
+            //})
+
+          }
+
+        }
+
+      },
 
       this.character = {
 
         init: function() {
 
-          if (!isNaN(selector) || '~`!#$%^&*+=-[]\\\';,/{}|":<>?'.indexOf(selector) !== -1) //_methodSelf.character.special.is()) << This doesn't work because it goes on a recursive loop, duh me!
+          if (!isNaN(selector) || '~`!#$%^&*+=-[]\\\';,/{}|":<>?'.indexOf(selector) !== -1) //_parent.character.special.is()) << This doesn't work because it goes on a recursive loop, duh me!
               return false
 
           return selector.length === 1? selector : selector[0]
@@ -97,7 +145,7 @@ var RH = (function() {
 
           is: function() {
 
-            var c = _methodSelf.character.init()
+            var c = _parent.character.init()
 
             return c && c === c.toUpperCase()
           }
@@ -108,7 +156,7 @@ var RH = (function() {
 
           is: function() {
 
-            var c = _methodSelf.character.init()
+            var c = _parent.character.init()
 
             return c && c === c.toLowerCase()
           } // psuedo-method - is
@@ -119,7 +167,7 @@ var RH = (function() {
 
           is: function() {
               
-            var c = _methodSelf.character.init()
+            var c = _parent.character.init()
 
             if (!c) return false
             
@@ -166,7 +214,7 @@ var RH = (function() {
           builder: function(objAttribs) {
               
             var html    = '<',
-                notVoid = objAttribs.name && !(objAttribs.name in _methodSelf.html.elements.arVoid)? objAttribs.name : false 
+                notVoid = objAttribs.name && !(objAttribs.name in _parent.html.elements.arVoid)? objAttribs.name : false 
 
             objAttribs.name && (html += objAttribs.name)
                             && delete objAttribs.name 
@@ -191,7 +239,7 @@ var RH = (function() {
 
           less: function() {
               
-            return _methodSelf.html.tag.builder({
+            return _parent.html.tag.builder({
               name: 'link',
               rel:  "stylesheet/less", 
               type: 'text/css',
