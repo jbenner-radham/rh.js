@@ -1,3 +1,19 @@
+  /*
+  [
+    {
+        dir: 'src',
+        file: [
+         '_start',
+         'size',
+         '_end'
+        ]
+    }
+].forEach(function(obj) {
+    for (i in obj.file) {
+      console.log(obj.dir + '/' + obj.file[i] + '.js');
+    }
+});
+*/
 /*
         src: ['src/_start.js',
               'src/size.js',
@@ -18,11 +34,23 @@ module.exports = function(grunt) {
   [
     {
       dir: 'src',
+      file: ['_start']
+    },
+    {
+      dir: 'src/str',
       file: [
        '_start',
-       'size',
+       'character',
+       'code',
+       'html',
+       'trim',
+       'word',
        '_end'
       ]
+    },
+    {
+      dir: 'src',
+      file: ['_end']
     }
   ].forEach(function(obj) {
     for (var i in obj.file) {
