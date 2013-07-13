@@ -1,6 +1,7 @@
     if (typeof selector === 'string') {
 
-      if (selector[0] === '#') return document.getElementById(selector.slice(1))
+      if (['#', '.'].indexOf(selector[0]) !== -1)
+        return document.querySelector(selector)
 
       var _parent = this;
   
