@@ -37,6 +37,10 @@ module.exports = function(grunt) {
       file: ['_start']
     },
     {
+      dir: 'src',
+      file: ['size']
+    },
+    {
       dir: 'src/str',
       file: [
        '_start',
@@ -47,6 +51,10 @@ module.exports = function(grunt) {
        'word',
        '_end'
       ]
+    },
+    {
+      dir: 'src/object',
+      file: ['_start']
     },
     {
       dir: 'src',
