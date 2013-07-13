@@ -1,30 +1,3 @@
-  /*
-  [
-    {
-        dir: 'src',
-        file: [
-         '_start',
-         'size',
-         '_end'
-        ]
-    }
-].forEach(function(obj) {
-    for (i in obj.file) {
-      console.log(obj.dir + '/' + obj.file[i] + '.js');
-    }
-});
-*/
-/*
-        src: ['src/_start.js',
-              'src/size.js',
-              'src/string.js',
-              'src/code.js',
-              'src/character.js',
-              'src/html.js',
-              'src/object.js',
-              'src/_end.js']
-        dest: 'stuff.js'
-*/
 module.exports = function(grunt) {
   
   var rh = {
