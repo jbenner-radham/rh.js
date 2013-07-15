@@ -1,0 +1,22 @@
+{
+  "name": "rh.js",
+  "version": "0.0.0",
+  "description": "A Radioactive Hamster approved JavaScript (and CoffeeScript) helper utility library.",
+  "main": "RH.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jbenner55/rh.js.git"
+  },
+  "author": "James Benner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jbenner55/rh.js/issues"
+  }
+}
