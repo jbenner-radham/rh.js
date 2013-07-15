@@ -16,3 +16,6 @@ Returns the last word in a string.
 RH('Hello world!').wordLast()
 // returns 'world!'
 ```
+
+## License
+This code is released under the [MIT license](http://opensource.org/licenses/MIT). See the included **LICENSE.txt** file for reference.
