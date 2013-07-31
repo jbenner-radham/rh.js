@@ -7,7 +7,7 @@ function getQueryStringObj() {
 
   query.slice(1).split('&').forEach(function(argv) {
     var getVar = argv.split('=')
-        qsObj[getVar[0]] = getVar[1]
+    qsObj[getVar[0]] = getVar[1]
   })
 
   return qsObj
