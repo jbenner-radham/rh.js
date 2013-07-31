@@ -1,6 +1,7 @@
 
     return _self;
-})();
+
+})(); // SEAF - RH
 
 RH.getJson = function(uri, cbFn) {
 
@@ -14,7 +15,8 @@ RH.getJson = function(uri, cbFn) {
         if (request.readyState === 4 && request.status === 200)
             return cbFn(JSON.parse(request.responseText))
     }
-}
+
+} // method - getJson
 
 RH.getQueryString = function() {
 
@@ -33,4 +35,5 @@ RH.getQueryString = function() {
     })
 
     return qsObj
-}
+
+} // method - getQueryString
