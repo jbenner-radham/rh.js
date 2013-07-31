@@ -14,7 +14,7 @@ Strings
 #### .wordLast
 
 ```
-.wordLast()
+RH(string).wordLast()
 ```
 
 Returns the last word in a string.
