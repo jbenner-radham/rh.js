@@ -26,6 +26,7 @@ RH.getQueryString = function() {
     // it fine. However I put it in there because I'm paranoid.
     if (query === '' || query[0] !== '?') return null
 
+    // Chop off the preceding "?" and explode the string. 
     query.slice(1).split('&').forEach(function(argv) {
         var getVar = argv.split('=')
         qsObj[getVar[0]] = getVar[1]
