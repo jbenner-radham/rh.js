@@ -13,13 +13,13 @@ Strings
 
 #### .wordLast
 
-```js
+```JS
 RH(string).wordLast()
 ```
 
 Returns the last word in a string.
 
-```js
+```JS
 RH('Hello world!').wordLast()
 // returns 'world!'
 ```
@@ -29,7 +29,7 @@ Data Interchange
 
 #### RH.getJson
 
-```js
+```JS
 RH.getJson()
 ```
 
@@ -46,13 +46,13 @@ HTTP
 
 #### RH.getQueryString
 
-```js
+```JS
 RH.getQueryString()
 ```
 
 Returns an object populated with the window's query string arguments.
 
-```js
+```JS
 // example.com/?hello=world&how=areyou
 RH.getQueryString()
 // returns {hello: "world", how: "areyou"}
