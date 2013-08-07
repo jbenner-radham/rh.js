@@ -13,13 +13,13 @@ Strings
 
 #### .wordLast
 
-```
+```js
 RH(string).wordLast()
 ```
 
 Returns the last word in a string.
 
-```
+```js
 RH('Hello world!').wordLast()
 // returns 'world!'
 ```
@@ -29,13 +29,13 @@ Data Interchange
 
 #### RH.getJson
 
-```
+```js
 RH.getJson()
 ```
 
 Fetches a JSON file and allows for data handling with a lambda.  
 
-```
+```js
 RH.getJson(function(json) {
     // Do something with code here...
 });
@@ -46,13 +46,13 @@ HTTP
 
 #### RH.getQueryString
 
-```
+```js
 RH.getQueryString()
 ```
 
 Returns an object populated with the window's query string arguments.
 
-```
+```js
 // example.com/?hello=world&how=areyou
 RH.getQueryString()
 // returns {hello: "world", how: "areyou"}
