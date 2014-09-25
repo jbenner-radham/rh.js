@@ -1,3 +1,3 @@
-require('./xhr/xhr.js');
+var xhr = require('./xhr/xhr.js');
 
-console.log('YOLO!');
+console.log(xhr.request('radioactivehamster.com'));

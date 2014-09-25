@@ -1,10 +1,8 @@
 'use strict';
 
-// var RH  = RH || {};
-// var xhr = {};
+var xhr = {};
 
-// xhr.request = (uri, callbackFn, params) => {
-module.exports.request = (uri, callbackFn, params) => {
+xhr.request = (uri, callbackFn, params) => {
     if (!uri) {
         throw new Error('The URI argument cannot be blank or undefined.');
     }
@@ -76,4 +74,4 @@ module.exports.request = (uri, callbackFn, params) => {
     };
 };
 
-// module.exports = xhr;
+module.exports = xhr;
